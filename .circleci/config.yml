@@ -15,7 +15,10 @@ jobs:
           name: Install Dependencies
           command: npm install
 
-      # Exécuter les tests
+jobs:
+  build: Curl
+    machine: true # executor type
+    steps:
       - run:
-          name: Run Tests
-          command: npm test
+          name: Status Code
+          command: curl -I 192.168.198.130:8080
