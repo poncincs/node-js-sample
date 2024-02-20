@@ -24,19 +24,18 @@ jobs:
           name: Wait for Container to Start
           command: sleep 10
 
-      # Vérifier si le site renvoie un code 200
-      - run:
-          name: Check HTTP Status Code
-          command: |
-            status_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080)
-            if [ "$status_code" -eq 200 ]; then
-              echo "Site is up and running"
-            else
-              echo "Site is not responding properly, HTTP Status Code: $status_code"
-              exit 1
-            fi
-
       # Status code
-      #- run:
-      #    name: Status Code
-      #    command: docker exec -it node-js-app curl -I http://localhost:8080
+      - run:
+          name: Check status Code
+          command: docker exec -it node-js-app curl -I http://localhost:8080
+
+
+      # Login on DockerHub
+      - run:
+          name: Login on DockerHub
+          command: sudo docker login -u "${DOCKER_HUB_USERNAME}" -p "${DOCKER_HUB_PASSWD}"
+
+      # Publish image on DockerHub
+      - run:
+          name: Publish image on DockerHub
+          command: sudo docker push sampcn/node-js-sample:latest
