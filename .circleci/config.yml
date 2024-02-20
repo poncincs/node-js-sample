@@ -17,7 +17,7 @@ jobs:
       # Run du container
       - run:
           name: Run node-js-sample
-          command: docker run -p 8080:8080 --name node-js-app sampcn/node-js-sample:latest
+          command: docker run -p 8080:8080 -d --name node-js-app sampcn/node-js-sample:latest
 
       # Installation de Curl
       - run:
