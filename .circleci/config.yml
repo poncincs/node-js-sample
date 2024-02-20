@@ -10,16 +10,22 @@ jobs:
     steps:
       - checkout
 
-      # Installer les dépendances
+      # Build du container
       - run:
-          name: Install Dependencies
-          command: npm install
+          name: Build node-js-sample
+          command: docker build -t node-js-sample:latest .
 
-  curl:
-    machine:
-      image: ubuntu:latest
+      # Run du container
+      - run:
+          name: Run node-js-sample
+          command: docker run -p 8080:8080 node-js-sample
 
-    steps:
+      # Installation de Curl
+      - run:
+          name: Installation Curl
+          command: apt install -y curl
+
+      # Status code
       - run:
           name: Status Code
           command: curl -I 192.168.198.130:8080
