@@ -27,4 +27,4 @@ jobs:
       # Status code
       - run:
           name: Status Code
-          command: docker exec -it node-js-app curl -I 192.168.198.130:8080
+          command: docker exec -it node-js-app curl -I http://localhost:8080
