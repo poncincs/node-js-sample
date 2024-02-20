@@ -15,8 +15,7 @@ jobs:
           name: Install Dependencies
           command: npm install
 
-jobs:
-  build:
+  curl:
     machine:
       image: ubuntu:latest
 
