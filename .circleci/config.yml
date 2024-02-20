@@ -11,12 +11,12 @@ jobs:
 
       # Build du container
       - run:
-          name: Build node-js-sample
-          command: docker pull sampcn/node-js-sample:latest
+          name: Building image
+          command: docker build -t node-js-sample:latest .
 
       # Run du container
       - run:
-          name: Run node-js-sample
+          name: Run container
           command: docker run -p 8080:8080 -d --name node-js-app sampcn/node-js-sample:latest
 
       # Timesleep
