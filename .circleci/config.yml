@@ -16,7 +16,7 @@ jobs:
           command: npm install
 
 jobs:
-  build: Curl
+  build:
     machine:
       image: ubuntu:latest
 
