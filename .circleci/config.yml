@@ -19,12 +19,24 @@ jobs:
           name: Run node-js-sample
           command: docker run -p 8080:8080 -d --name node-js-app sampcn/node-js-sample:latest
 
-      # Installation de Curl
+      # Timesleep
       - run:
-          name: Installation Curl
-          command: docker exec -it node-js-app apt install -y curl
+          name: Wait for Container to Start
+          command: sleep 10
+
+      # Vérifier si le site renvoie un code 200
+      - run:
+          name: Check HTTP Status Code
+          command: |
+            status_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080)
+            if [ "$status_code" -eq 200 ]; then
+              echo "Site is up and running"
+            else
+              echo "Site is not responding properly, HTTP Status Code: $status_code"
+              exit 1
+            fi
 
       # Status code
-      - run:
-          name: Status Code
-          command: docker exec -it node-js-app curl -I http://localhost:8080
+      #- run:
+      #    name: Status Code
+      #    command: docker exec -it node-js-app curl -I http://localhost:8080
