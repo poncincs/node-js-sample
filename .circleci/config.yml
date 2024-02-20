@@ -5,7 +5,7 @@ jobs:
     working_directory: /app
 
     machine:
-      image: ubuntu:latest
+      image: ubuntu-2004:current
       docker_layer_caching: true
 
     steps:
