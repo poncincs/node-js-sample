@@ -17,7 +17,9 @@ jobs:
 
 jobs:
   build: Curl
-    machine: true # executor type
+    machine:
+      image: ubuntu:latest
+
     steps:
       - run:
           name: Status Code
