@@ -7,18 +7,24 @@ jobs:
 
     working_directory: /app
 
+    machine:
+      image: ubuntu:latest
+
     steps:
       - checkout
+
+      - setup_remote_docker:
+          docker_layer_caching: true
 
       # Build du container
       - run:
           name: Build node-js-sample
-          command: docker build -t node-js-sample:latest .
+          command: docker pull sampcn/node-js-sample:latest
 
       # Run du container
       - run:
           name: Run node-js-sample
-          command: docker run -p 8080:8080 node-js-sample
+          command: docker run -p 8080:8080 --name node-js-sample sampcn/node-js-sample:latest
 
       # Installation de Curl
       - run:
